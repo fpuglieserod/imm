@@ -3,15 +3,19 @@ import imm.modelo.Agencia;
 //import laboratoriojee.modelo.EditorialExisteException;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 public class AccesoDB {
 
-	
+	private Date fecha_venta;
+	private LocalDate fecha_now = LocalDate.now();
+	//private Date fecha_creacion = Date.valueOf(fecha_now);
 	
 	public Boolean consultaAgencia (Agencia agencia) throws Exception{
 	
@@ -34,5 +38,63 @@ public class AccesoDB {
 	} catch (Exception ex){}	
 	return null;
 	}
+	
+	// este metodo devuelve el numero de ticket y persiste los datos en la DB
+	public long guardarTicket (Agencia agencia, String matricula, Date fecha_inicio, int minutos, float importe) throws Exception{
+		
+		try{
+		// guardo los datos 	
+			InitialContext initContext = new InitialContext();
+			DataSource ds = (DataSource) initContext.lookup("java:jboss/datasources/MySqlDS2");
+			Connection conn = ds.getConnection();
+			// hay que ver como ingresar los datos a la DB y me tengo que quedar con el numero de ticket ademas hay que 
+			// cambiar el estado a vendido
+			//PreparedStatement ps = conn.prepareStatement("Select * from agenciass WHERE nombre = '" + agencia.getNombre() +"'");
+				
+			String query = "INSERT INTO ventas (numero, id_a, estado, codigo, matricula, hora_inicio, minutos, fecha_venta, monto)" + " VALUES(?,?,?,?,?,?,?,?,?)";
+		    String query2= "Select * from agencias WHERE nombre = '" + agencia.getNombre() +"'";
+			PreparedStatement ps=conn.prepareStatement(query);
+			PreparedStatement ps2 = conn.prepareStatement(query2);
+			ResultSet rs = ps2.executeQuery();
+			int id_a=-1;
+			while(rs.next()){
+			 id_a = rs.getInt(1);
+			}
+		    // escribo el numero de ticket en la base como null ya que es autoincrement
+		    ps.setInt(1, (Integer) null);
+		    //guarodo la id  de la agencia en la DB ventas 
+		    ps.setInt(2,id_a);
+		    //agrego Estado
+		    ps.setString(3,"VENDIDO");
+		    //agrego codigo
+		    ps.setInt(4, (Integer) null);
+		    //agrego matricula 
+		    ps.setString(5, matricula);
+		    //hora_inicio
+		    ps.setDate(6, fecha_inicio);
+		    //agrego minutos
+		    ps.setInt(7, minutos);
+		    //agrego fecha de venta
+		    fecha_venta= Date.valueOf(fecha_now);
+		    ps.setDate(8, fecha_venta);
+		    // guardo el importe
+		    ps.setFloat(9, importe);
+		    
+		    //busco el numero de ticket 
+		    ps = conn.prepareStatement("select LAST_INSERT_ID()");
+		    rs = ps.executeQuery();
+		    while (rs.next()){
+		    return 	rs.getInt("numero");
+		    }
+		    ps.execute();
+		    conn.close();
+			
+		    
+			
+		}catch (Exception ex){}
+		return 12313213;
+		
+	} 
+
 
 }
