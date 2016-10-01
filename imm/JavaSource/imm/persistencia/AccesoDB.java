@@ -35,7 +35,9 @@ public class AccesoDB {
 	     return true;
 	 }else return false;
 	
-	} catch (Exception ex){}	
+	} catch (Exception ex){
+		ex.printStackTrace();
+	}	
 	return null;
 	}
 	
@@ -51,7 +53,7 @@ public class AccesoDB {
 			// cambiar el estado a vendido
 			//PreparedStatement ps = conn.prepareStatement("Select * from agenciass WHERE nombre = '" + agencia.getNombre() +"'");
 				
-			String query = "INSERT INTO ventas (numero, id_a, estado, codigo, matricula, hora_inicio, minutos, fecha_venta, monto)" + " VALUES(?,?,?,?,?,?,?,?,?)";
+			String query = "INSERT INTO ventas (id_a, estado,matricula, hora_inicio, minutos, fecha_venta, monto)" + " VALUES(?,?,?,?,?,?,?)";
 		    String query2= "Select * from agencias WHERE nombre = '" + agencia.getNombre() +"'";
 			PreparedStatement ps=conn.prepareStatement(query);
 			PreparedStatement ps2 = conn.prepareStatement(query2);
@@ -61,37 +63,39 @@ public class AccesoDB {
 			 id_a = rs.getInt(1);
 			}
 		    // escribo el numero de ticket en la base como null ya que es autoincrement
-		    ps.setInt(1, (Integer) null);
+		    //ps.setInt(1, (Integer) null);
 		    //guarodo la id  de la agencia en la DB ventas 
-		    ps.setInt(2,id_a);
+		    ps.setInt(1,id_a);
 		    //agrego Estado
-		    ps.setString(3,"VENDIDO");
+		    ps.setString(2,"VENDIDO");
 		    //agrego codigo
-		    ps.setInt(4, (Integer) null);
+		    //ps.setInt(4, (Integer) null);
 		    //agrego matricula 
-		    ps.setString(5, matricula);
+		    ps.setString(3, matricula);
 		    //hora_inicio
-		    ps.setDate(6, fecha_inicio);
+		    ps.setDate(4, fecha_inicio);
 		    //agrego minutos
-		    ps.setInt(7, minutos);
+		    ps.setInt(5, minutos);
 		    //agrego fecha de venta
 		    fecha_venta= Date.valueOf(fecha_now);
-		    ps.setDate(8, fecha_venta);
+		    ps.setDate(6, fecha_venta);
 		    // guardo el importe
-		    ps.setFloat(9, importe);
-		    
+		    ps.setFloat(7, 5);
+		    ps.execute();
 		    //busco el numero de ticket 
 		    ps = conn.prepareStatement("select LAST_INSERT_ID()");
 		    rs = ps.executeQuery();
 		    while (rs.next()){
-		    return 	rs.getInt("numero");
+		    return 	rs.getInt(1);
 		    }
 		    ps.execute();
 		    conn.close();
 			
 		    
 			
-		}catch (Exception ex){}
+		}catch (Exception ex){
+			ex.printStackTrace();
+		}
 		return 12313213;
 		
 	} 

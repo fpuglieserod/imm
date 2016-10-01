@@ -19,8 +19,8 @@ private int minutos;
 private static ImmImpl gestor;
 private TicketVO ticketvo;
 // son para probar la hora de inicio
- Date fecha_prueba;
- LocalDate fecha_now_prueba = LocalDate.now();
+Date fecha_prueba;
+LocalDate fecha_now_prueba = LocalDate.now();
 
 //String nombre = "abitab";
 //agencia.setNombre(nombre);
@@ -93,7 +93,7 @@ public void setTicketVO(TicketVO ticketvo) {
 		this.minutos = minutos;
 		//ticketvo = gestor.ventaTicket(agencia, matricula, hora_inicio, minutos);
 		fecha_prueba= Date.valueOf(fecha_now_prueba);
-		gestor.ventaTicket(this.agencia, "SFX1890478", fecha_prueba, minutos);
+		gestor.ventaTicket(this.agencia, this.matricula, this.hora_inicio, this.minutos);
 		
 	
 	

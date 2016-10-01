@@ -20,16 +20,22 @@ public class PaginaTestBean {
 	private int minutos;
 	private ImmImpl gestor = new ImmImpl();
 	
+	
+	public ImmImpl getGestor() {
+		return gestor;
+	}
+	public void setGestor(ImmImpl gestor) {
+		this.gestor = gestor;
+	}
 	public PaginaTestBean (){
-		
-		
 	}
 	public String comprar() throws Exception{
 		try{
 		Agencia agencia = new Agencia();
 		agencia.setNombre(this.nombre_agencia);
-		
-		gestor.ventaTicket(agencia, this.matricula, this.fecha_venta, this.minutos);
+		System.out.println("en el metodo comprar........");
+		Ticket t = new Ticket();
+		t = gestor.ventaTicket(agencia, this.matricula, this.fecha_venta, this.minutos);
 		return null;
 		}catch (Exception ex){}
 		return null;

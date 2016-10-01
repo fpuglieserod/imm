@@ -4,8 +4,8 @@ import java.sql.Date;
 import imm.persistencia.*;
 public class ImmImpl implements Imm {
 
-private AccesoDB accesoDB;	
-private Ticket ticket;	
+private AccesoDB accesoDB = new AccesoDB();	
+private Ticket ticket = new Ticket();	
 	
 	@Override
 	public Boolean esAgencia(Agencia agencia) throws Exception{
@@ -25,12 +25,14 @@ private Ticket ticket;
 		ticket.setHora_inicio(hora_inicio);
 		ticket.setMinutos(minutos);
 		ticket.calcular_importe(minutos);
-		System.out.println("Estamo aca");
+		System.out.println("En venta ticket");
 		System.out.println("Agencia: "+ ticket.getAgencia().getNombre());
 		this.accesoDB.guardarTicket(agencia, matricula, hora_inicio, minutos, ticket.getImporte());
-	
+	    
 		return ticket;
-		}catch(Exception ex){}
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
 		return null;
 	}
 
