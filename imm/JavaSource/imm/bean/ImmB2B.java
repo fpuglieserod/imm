@@ -12,12 +12,13 @@ import javax.jws.WebMethod;
 public class ImmB2B {
 
 	
-private Agencia agencia;
+private Agencia agencia = new Agencia();
 private String matricula;
 private Date hora_inicio;
 private int minutos;
-private static ImmImpl gestor;
+private static ImmImpl gestor = new ImmImpl();
 private TicketVO ticketvo;
+private Ticket ticket;
 // son para probar la hora de inicio
 Date fecha_prueba;
 LocalDate fecha_now_prueba = LocalDate.now();
@@ -81,26 +82,33 @@ public void setTicketVO(TicketVO ticketvo) {
 
 
 @WebMethod
-	public Boolean venta(Agencia agencia,String matricula, Date hora_inicio, int minutos) throws Exception{
+	public Ticket venta(Agencia agencia,String matricula, long hora_inicio, int minutos){
 	//TicketVO ticket;
+	try{
 	this.agencia = agencia;
 	//es una agencia valida
-	
+	System.out.println("Adentro de del metodo venta del webservice");
 	if (gestor.esAgencia(this.agencia)){
+		System.out.println("adentro del if de venta");
 		//procedo a vender
 		this.matricula = matricula;
-		this.hora_inicio = hora_inicio;
+		Date h = new Date (hora_inicio);
+		//this.hora_inicio = hora_inicio;
+		this.hora_inicio = h;
 		this.minutos = minutos;
 		//ticketvo = gestor.ventaTicket(agencia, matricula, hora_inicio, minutos);
 		fecha_prueba= Date.valueOf(fecha_now_prueba);
-		gestor.ventaTicket(this.agencia, this.matricula, this.hora_inicio, this.minutos);
+		this.ticket = gestor.ventaTicket(this.agencia, this.matricula, this.hora_inicio, this.minutos);
 		
 	
 	
 	}else System.out.println("Agencia no valida");
+	} catch (Exception ex){
+	ex.printStackTrace();
+		return null;
+	}
 	
-	
-	return true;
+	return this.ticket;
 	} 
 
 @WebMethod 

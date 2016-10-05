@@ -66,7 +66,7 @@ public void setCodigo(Codigo codigo) {
 
 
 public void calcular_importe (int minutos){
-	    float aux = VALOR_HORA*minutos;
+	    float aux = (VALOR_HORA*minutos)/60;
 	    this.minutos = minutos;
 	    this.setImporte(aux);
 	    

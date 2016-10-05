@@ -23,10 +23,10 @@ public class AccesoDB {
 	InitialContext initContext = new InitialContext();
 	DataSource ds = (DataSource) initContext.lookup("java:jboss/datasources/MySqlDS2");
 	Connection conn = ds.getConnection();
-	PreparedStatement ps = conn.prepareStatement("Select * from agenciass WHERE nombre = '" + agencia.getNombre() +"'");
+	PreparedStatement ps = conn.prepareStatement("Select * from agencias WHERE nombre = '" + agencia.getNombre() +"'");
 	ResultSet rs = ps.executeQuery();
 	
-	if(!rs.absolute(1)) {//aparentemente la consulta devuelve 1 si es verdadera
+	if(rs.absolute(1)) {//aparentemente la consulta devuelve 1 si es verdadera
 	     
 	     System.out.println("la agencia existe");
 	     
@@ -80,13 +80,15 @@ public class AccesoDB {
 		    fecha_venta= Date.valueOf(fecha_now);
 		    ps.setDate(6, fecha_venta);
 		    // guardo el importe
-		    ps.setFloat(7, 5);
+		    ps.setFloat(7, importe);
 		    ps.execute();
 		    //busco el numero de ticket 
 		    ps = conn.prepareStatement("select LAST_INSERT_ID()");
 		    rs = ps.executeQuery();
 		    while (rs.next()){
-		    return 	rs.getInt(1);
+		    	System.out.println("en guardar ticket.......");
+		    	return 	rs.getInt(1);
+		    
 		    }
 		    ps.execute();
 		    conn.close();
@@ -99,6 +101,56 @@ public class AccesoDB {
 		return 12313213;
 		
 	} 
-
+	public int anular(long numero, Agencia agencia) throws Exception{
+		
+		try {
+			InitialContext initContext = new InitialContext();
+			DataSource ds = (DataSource) initContext.lookup("java:jboss/datasources/MySqlDS2");
+			Connection conn = ds.getConnection();
+			String query = "Select * from agencias WHERE nombre = '" + agencia.getNombre() +"'";
+			PreparedStatement ps=conn.prepareStatement(query);
+			ResultSet rs = ps.executeQuery();
+			int id_a=-1;
+			while(rs.next()){
+			 id_a = rs.getInt(1);
+			}
+			query = "Select estado from ventas where id_a = '" + id_a + "'";
+			String estado = null;
+			ps = conn.prepareStatement(query);
+			rs=ps.executeQuery();
+			while(rs.next()){
+				 estado = rs.getString(3);
+				}
+			if(estado == "VENDIDO"){
+				//CAMBIO EL ESTADO A ANULADO Y GENERO EL CODIGO 
+				//
+				query = "Select * from ventas where numero ='" + numero +"'";
+				ps = conn.prepareStatement(query);
+				rs = ps.executeQuery();
+				while (rs.next()){
+					long aux = rs.getInt(1);
+					
+				}
+				query = "Insert into ventas (estado) values (?) where numero = "+numero+"'";
+				ps.setString(1,"ANULADO");
+				ps.executeQuery();
+				// creo un nuevo codigo de anulación al que lo asocio al numero de ticket
+				query = "Insert into codigos (numero) values (?) ";
+				ps.setInt(1, (int) numero);
+				ps.execute();
+				//recupero el numero de codigo 
+				ps = conn.prepareStatement("select LAST_INSERT_ID()");
+				rs = ps.executeQuery();
+				while (rs.next()){
+				   return rs.getInt(1);
+				}
+				ps.close();
+				}else {System.out.println("El ticket ya fue anulado");}
+		    }catch (Exception ex){
+			   ex.printStackTrace();
+		   }
+		   return 123445;
+		
+	}
 
 }

@@ -27,7 +27,7 @@ private Ticket ticket = new Ticket();
 		ticket.calcular_importe(minutos);
 		System.out.println("En venta ticket");
 		System.out.println("Agencia: "+ ticket.getAgencia().getNombre());
-		this.accesoDB.guardarTicket(agencia, matricula, hora_inicio, minutos, ticket.getImporte());
+		ticket.setNumero(this.accesoDB.guardarTicket(agencia, matricula, hora_inicio, minutos, ticket.getImporte()));
 	    
 		return ticket;
 		}catch(Exception ex){
@@ -37,9 +37,17 @@ private Ticket ticket = new Ticket();
 	}
 
 	@Override
-	public Codigo anularVenta(long numero, Agencia agencia) {
+	public int anularVenta(long numero, Agencia agencia) throws Exception{
 		// TODO Auto-generated method stub
-		return null;
+		try {
+		Codigo codigo = new Codigo(); 
+		int cod = this.accesoDB.anular(numero, agencia);
+		return cod;	
+		}catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		return -1;
 	}
 	public TicketVO generaTicket (Ticket ticket){
 		 

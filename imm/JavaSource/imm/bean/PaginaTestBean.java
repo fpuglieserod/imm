@@ -19,8 +19,15 @@ public class PaginaTestBean {
 	private String nombre_agencia;
 	private int minutos;
 	private ImmImpl gestor = new ImmImpl();
+	private long numero_ticket;
 	
 	
+	public long getNumero_ticket() {
+		return numero_ticket;
+	}
+	public void setNumero_ticket(long numero_ticket) {
+		this.numero_ticket = numero_ticket;
+	}
 	public ImmImpl getGestor() {
 		return gestor;
 	}
@@ -70,4 +77,20 @@ public class PaginaTestBean {
 	public void setMinutos(int minutos) {
 		this.minutos = minutos;
 	}
-}
+	public String anular (){
+		
+		try{
+			Agencia agencia2 = new Agencia();
+			agencia2.setNombre(this.nombre_agencia);
+			System.out.println("en el metodo comprar........");
+			int c = gestor.anularVenta(this.numero_ticket, agencia2); 
+			System.out.println("Codigo anulación: " + c);
+			return null;
+			}catch (Exception ex){}
+			return null;
+		
+		}
+				
+	}
+
+
