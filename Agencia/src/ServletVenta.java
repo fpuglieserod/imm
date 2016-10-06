@@ -1,6 +1,8 @@
 
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -34,16 +36,22 @@ public class ServletVenta extends HttpServlet {
 			IAdministracionImp adm = new IAdministracionImp();
 			
 			String matricula = request.getParameter("matricula");
-			Date horaInicio = new Date(request.getParameter("horaInicio"));
+			
+			String horaInicio = request.getParameter("horaInicio");
+			SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+			Date fechainicio = formatoDelTexto.parse(horaInicio);
+			
 			Integer minutos = new Integer(request.getParameter("minutos"));
 			
-			String mensaje = adm.ventaTicket(matricula, horaInicio, minutos);
+			String mensaje = adm.ventaTicket(matricula, fechainicio, minutos);
 			
 			response.getWriter().write(mensaje);
 			
 			
 		} catch(NumberFormatException e){
 			response.getWriter().write("los parametros no son validos");
+		} catch (ParseException e) {
+			response.getWriter().write("formato de fecha invalido");
 		}
 		
 	}

@@ -1,3 +1,6 @@
+import imm.bean.ImmB2B;
+import imm.bean.ImmB2BService;
+
 import java.util.Date;
 
 public class IAdministracionImp implements IAdministracion {
@@ -23,7 +26,7 @@ public class IAdministracionImp implements IAdministracion {
 		
 		try{
 			//invocar por ws a la venta de la imm
-			ImmB2BService srvimm = new ImmB2BService();
+			ImmB2BService srvimm; //= new ImmB2BService();
 			ImmB2B imm = srvimm.getImmB2BPort();
 			if (imm.venta(1, matricula, hora_inicio, minutos)) {
 				//setear valores obtenidos en el ticket				
