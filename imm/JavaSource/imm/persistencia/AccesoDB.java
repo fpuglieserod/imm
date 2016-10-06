@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 
 import javax.naming.InitialContext;
@@ -73,7 +74,11 @@ public class AccesoDB {
 		    //agrego matricula 
 		    ps.setString(3, matricula);
 		    //hora_inicio
-		    ps.setDate(4, fecha_inicio);
+		    
+		    //VER COMO PASAR UN TIME STAMP a la DB, antes le pasaba la hora-inicio y funcionaba bien 
+		    
+		    ps.setTimestamp(4, new java.sql.Timestamp (fecha_inicio.getTime()));
+		    //ps.setDate(4, fecha_inicio);
 		    //agrego minutos
 		    ps.setInt(5, minutos);
 		    //agrego fecha de venta
@@ -119,7 +124,7 @@ public class AccesoDB {
 			ps = conn.prepareStatement(query);
 			rs=ps.executeQuery();
 			while(rs.next()){
-				 estado = rs.getString(3);
+				 estado = rs.getString(1);
 				}
 			if(estado == "VENDIDO"){
 				//CAMBIO EL ESTADO A ANULADO Y GENERO EL CODIGO 

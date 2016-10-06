@@ -25,14 +25,12 @@ required="true" label="Matricula"/><br>
 <h:inputText id="minutos" value="#{paginaTestBean.minutos}" 
 required="true" label="Minutosl"/><br>
 <h:commandButton value="Confirmar" type="submit" action="#{paginaTestBean.comprar}"/><br>
-</h:form>
-</f:view>
 
-<br>
-<br>
+
+</h:form>
+
 <h1>Anular Ticket</h1>
-<f:view>
-<h:messages showSummary="true" infoStyle="color:blue" errorStyle="color:red"/>
+
 <h:form>
 <h:outputText value="Agencia"/>
 <h:inputText id="nombre_agencia" value="#{paginaTestBean.nombre_agencia}" 

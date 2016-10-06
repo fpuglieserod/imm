@@ -11,7 +11,7 @@ import javax.jws.WebMethod;
 @WebService
 public class ImmB2B {
 
-	
+//private Time hora_venta;	
 private Agencia agencia = new Agencia();
 private String matricula;
 private Date hora_inicio;
@@ -97,7 +97,7 @@ public void setTicketVO(TicketVO ticketvo) {
 		this.hora_inicio = h;
 		this.minutos = minutos;
 		//ticketvo = gestor.ventaTicket(agencia, matricula, hora_inicio, minutos);
-		fecha_prueba= Date.valueOf(fecha_now_prueba);
+		//fecha_prueba= Date.valueOf(fecha_now_prueba);
 		this.ticket = gestor.ventaTicket(this.agencia, this.matricula, this.hora_inicio, this.minutos);
 		
 	

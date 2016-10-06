@@ -1,16 +1,18 @@
 package imm.modelo;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Ticket {
 
 
-private static float VALOR_HORA = 60; 	
+private static float VALOR_HORA = 16; 	
 private long numero;
 private Agencia agencia;
 private String matricula;
 private Date fecha_venta;
 private Date hora_inicio;
+//private Timestamp hora_init;
 private int minutos; // minutos de estacionamiento
 private float importe;
 private enum estado {VENDIDO,ANULADO};
