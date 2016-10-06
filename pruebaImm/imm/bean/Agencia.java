@@ -3,21 +3,20 @@ package imm.bean;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para ventaResponse complex type.
+ * <p>Clase Java para agencia complex type.
  * 
  * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
- * &lt;complexType name="ventaResponse">
+ * &lt;complexType name="agencia">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="return" type="{http://bean.imm/}ticket" minOccurs="0"/>
+ *         &lt;element name="nombre" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -27,36 +26,35 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ventaResponse", propOrder = {
-    "_return"
+@XmlType(name = "agencia", propOrder = {
+    "nombre"
 })
-public class VentaResponse {
+public class Agencia {
 
-    @XmlElement(name = "return")
-    protected Ticket _return;
+    protected String nombre;
 
     /**
-     * Obtiene el valor de la propiedad return.
+     * Obtiene el valor de la propiedad nombre.
      * 
      * @return
      *     possible object is
-     *     {@link Ticket }
+     *     {@link String }
      *     
      */
-    public Ticket getReturn() {
-        return _return;
+    public String getNombre() {
+        return nombre;
     }
 
     /**
-     * Define el valor de la propiedad return.
+     * Define el valor de la propiedad nombre.
      * 
      * @param value
      *     allowed object is
-     *     {@link Ticket }
+     *     {@link String }
      *     
      */
-    public void setReturn(Ticket value) {
-        this._return = value;
+    public void setNombre(String value) {
+        this.nombre = value;
     }
 
 }

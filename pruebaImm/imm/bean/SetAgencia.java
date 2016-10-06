@@ -3,21 +3,20 @@ package imm.bean;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para ventaResponse complex type.
+ * <p>Clase Java para setAgencia complex type.
  * 
  * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
- * &lt;complexType name="ventaResponse">
+ * &lt;complexType name="setAgencia">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="return" type="{http://bean.imm/}ticket" minOccurs="0"/>
+ *         &lt;element name="arg0" type="{http://bean.imm/}agencia" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -27,36 +26,35 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ventaResponse", propOrder = {
-    "_return"
+@XmlType(name = "setAgencia", propOrder = {
+    "arg0"
 })
-public class VentaResponse {
+public class SetAgencia {
 
-    @XmlElement(name = "return")
-    protected Ticket _return;
+    protected Agencia arg0;
 
     /**
-     * Obtiene el valor de la propiedad return.
+     * Obtiene el valor de la propiedad arg0.
      * 
      * @return
      *     possible object is
-     *     {@link Ticket }
+     *     {@link Agencia }
      *     
      */
-    public Ticket getReturn() {
-        return _return;
+    public Agencia getArg0() {
+        return arg0;
     }
 
     /**
-     * Define el valor de la propiedad return.
+     * Define el valor de la propiedad arg0.
      * 
      * @param value
      *     allowed object is
-     *     {@link Ticket }
+     *     {@link Agencia }
      *     
      */
-    public void setReturn(Ticket value) {
-        this._return = value;
+    public void setArg0(Agencia value) {
+        this.arg0 = value;
     }
 
 }

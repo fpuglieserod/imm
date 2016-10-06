@@ -8,16 +8,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para ventaResponse complex type.
+ * <p>Clase Java para getMatriculaResponse complex type.
  * 
  * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
- * &lt;complexType name="ventaResponse">
+ * &lt;complexType name="getMatriculaResponse">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="return" type="{http://bean.imm/}ticket" minOccurs="0"/>
+ *         &lt;element name="return" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -27,23 +27,23 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ventaResponse", propOrder = {
+@XmlType(name = "getMatriculaResponse", propOrder = {
     "_return"
 })
-public class VentaResponse {
+public class GetMatriculaResponse {
 
     @XmlElement(name = "return")
-    protected Ticket _return;
+    protected String _return;
 
     /**
      * Obtiene el valor de la propiedad return.
      * 
      * @return
      *     possible object is
-     *     {@link Ticket }
+     *     {@link String }
      *     
      */
-    public Ticket getReturn() {
+    public String getReturn() {
         return _return;
     }
 
@@ -52,10 +52,10 @@ public class VentaResponse {
      * 
      * @param value
      *     allowed object is
-     *     {@link Ticket }
+     *     {@link String }
      *     
      */
-    public void setReturn(Ticket value) {
+    public void setReturn(String value) {
         this._return = value;
     }
 
