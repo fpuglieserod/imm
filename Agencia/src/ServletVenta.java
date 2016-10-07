@@ -53,7 +53,6 @@ public class ServletVenta extends HttpServlet {
 		} catch (ParseException e) {
 			response.getWriter().write("formato de fecha invalido");
 		}
-		
 	}
 
 	/**
