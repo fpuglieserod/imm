@@ -32,7 +32,8 @@ public class AccesoDB {
 		
 		ps.execute();
 		ps.close();
-		
+		rs.close();
+		ps2.close();
 		conn.close();
 		} 
 		catch (Exception ex){
@@ -59,13 +60,57 @@ public class AccesoDB {
 				PreparedStatement ps2 = conn.prepareStatement(anula);
 				ps2.executeQuery();
 				mensaje = "Se anulo el ticket exitosamente";
+				ps2.close();
 			} catch (Exception ex){
 				mensaje = "No se pudo anular el ticket " + ex.getMessage();
 			}
 		}
 		
+		rs.close();
+		ps.close();
 		conn.close();
 		return mensaje;
 		}
 	
+	public Boolean esUsuario(String usuario, String contrasena) throws Exception {
+		
+		InitialContext initContext = new InitialContext();
+		DataSource ds = (DataSource) initContext.lookup("java:jboss/datasources/MySqlDS");
+		Connection conn = ds.getConnection();
+		
+		String consulta = "select * from usuario where usuario = " + usuario 
+							+ "password = " + contrasena + ";";
+		PreparedStatement ps = conn.prepareStatement(consulta);
+		ResultSet rs = ps.executeQuery();
+		
+		if (!(rs.next())) {
+			rs.close();
+			ps.close();
+			conn.close();
+			return false;
+		}
+		else {
+			rs.close();
+			ps.close();
+			conn.close();
+			return true;
+		}
+	}
+	
+	public void altaUsuario(String usuario, String contrasena, int terminal) throws Exception {
+		
+		InitialContext initContext = new InitialContext();
+		DataSource ds = (DataSource) initContext.lookup("java:jboss/datasources/MySqlDS");
+		Connection conn = ds.getConnection();
+		
+		String insert = "insert into usuario (usuario, password, terminal) values ('" + usuario
+						+ "','" + contrasena + "'," + String.valueOf(terminal) + ";";
+		
+		PreparedStatement ps = conn.prepareStatement(insert);
+		ps.executeQuery();
+		
+		ps.close();
+		conn.close();
+		
+	}
 }

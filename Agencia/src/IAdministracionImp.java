@@ -32,8 +32,13 @@ public class IAdministracionImp implements IAdministracion {
 			ImmB2B imm = srvimm.getImmB2BPort();
 			Agencia agencia = imm.getAgencia();
 			long hi = hora_inicio.getTime(); //en version definitiva pasar datetime
-			if (imm.venta(agencia, matricula, hi, minutos) != null) {
-				//setear valores obtenidos en el ticket				
+			imm.bean.Ticket t = imm.venta(agencia, matricula, hi, minutos);
+			if (t != null) {
+				
+				tk.setNumero(t.getNumero());
+				//tk.setFechaHoraVenta(t.getFecha_venta());
+				tk.setImporte(t.getImporte());
+								
 				AccesoDB accesoDB = new AccesoDB();
 				accesoDB.guardarTicket(tk);
 				mensaje = "Venta realizada con exito";
@@ -64,6 +69,34 @@ public class IAdministracionImp implements IAdministracion {
 				mensaje = "No se pudo anular el ticket " + ex.getMessage();
 			}
 
+		return mensaje;
+	}
+	
+	public String login(String usuario, String contrasena) throws Exception {
+		String mensaje = "";
+		
+		try {
+			AccesoDB accesoDB = new AccesoDB();
+			if (accesoDB.esUsuario(usuario, contrasena)) mensaje = "ok";
+			else mensaje = "error";
+		} catch (Exception ex) {
+			mensaje = "error de acceso";
+		}
+		
+		return mensaje;
+	}
+	
+	public String altaUsuario(String usuario, String contrasena, int terminal) {
+		String mensaje = "";
+		
+		try {
+			AccesoDB accesoDB = new AccesoDB();
+			accesoDB.altaUsuario(usuario, contrasena, terminal); 
+			mensaje = "Se dio de alta el usuario correctamente";
+		} catch (Exception ex) {
+			mensaje = "No se pudo dar de alta el usuario por error de acceso";
+		}
+		
 		return mensaje;
 	}
 
