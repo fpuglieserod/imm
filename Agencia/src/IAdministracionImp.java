@@ -72,20 +72,6 @@ public class IAdministracionImp implements IAdministracion {
 		return mensaje;
 	}
 	
-	public String login(String usuario, String contrasena) throws Exception {
-		String mensaje = "";
-		
-		try {
-			AccesoDB accesoDB = new AccesoDB();
-			if (accesoDB.esUsuario(usuario, contrasena)) mensaje = "ok";
-			else mensaje = "error";
-		} catch (Exception ex) {
-			mensaje = "error de acceso";
-		}
-		
-		return mensaje;
-	}
-	
 	public String altaUsuario(String usuario, String contrasena, int terminal) {
 		String mensaje = "";
 		

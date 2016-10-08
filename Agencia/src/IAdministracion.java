@@ -7,8 +7,8 @@ public interface IAdministracion {
 	
 	public String anularTicket(int numero);
 	
-//	public void login();
-//	
+	public String altaUsuario(String usuario, String contrasena, int terminal);
+	
 //	public void reporteTotalDiario();
 //	
 //	public void reporteTotalXFranjaHoraria();
