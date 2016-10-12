@@ -43,7 +43,7 @@ public class AccesoDB {
 	}
 	
 	// este metodo devuelve el numero de ticket y persiste los datos en la DB
-	public long guardarTicket (Agencia agencia, String matricula, Date fecha_inicio, int minutos, float importe) throws Exception{
+	public long guardarTicket (Agencia agencia, String matricula, Timestamp fecha_inicio, int minutos, float importe) throws Exception{
 		
 		try{
 		// guardo los datos 	
@@ -77,7 +77,8 @@ public class AccesoDB {
 		    
 		    //VER COMO PASAR UN TIME STAMP a la DB, antes le pasaba la hora-inicio y funcionaba bien 
 		    
-		    ps.setTimestamp(4, new java.sql.Timestamp (fecha_inicio.getTime()));
+		   // ps.setTimestamp(4, new java.sql.Timestamp (fecha_inicio.getTime()));
+		    ps.setTimestamp(4, fecha_inicio);
 		    //ps.setDate(4, fecha_inicio);
 		    //agrego minutos
 		    ps.setInt(5, minutos);
@@ -118,15 +119,20 @@ public class AccesoDB {
 			int id_a=-1;
 			while(rs.next()){
 			 id_a = rs.getInt(1);
+				System.out.println("id_a: " + id_a);
+
 			}
-			query = "Select estado from ventas where id_a = '" + id_a + "'";
+			//agregar a la querry el numero de ticket
+			query = "Select estado from ventas where id_a = '" + id_a + "' and numero = '" + numero+ "'";
 			String estado = null;
 			ps = conn.prepareStatement(query);
 			rs=ps.executeQuery();
 			while(rs.next()){
 				 estado = rs.getString(1);
-				}
-			if(estado == "VENDIDO"){
+					System.out.println("Estado " + estado);
+
+			}
+			if(estado.equals("VENDIDO")) {
 				//CAMBIO EL ESTADO A ANULADO Y GENERO EL CODIGO 
 				//
 				query = "Select * from ventas where numero ='" + numero +"'";
@@ -136,11 +142,13 @@ public class AccesoDB {
 					long aux = rs.getInt(1);
 					
 				}
-				query = "Insert into ventas (estado) values (?) where numero = "+numero+"'";
+				query = "update ventas set estado = ? where numero = '"+numero+"'";
+				ps = conn.prepareStatement(query);
 				ps.setString(1,"ANULADO");
-				ps.executeQuery();
+				ps.execute();
 				// creo un nuevo codigo de anulación al que lo asocio al numero de ticket
 				query = "Insert into codigos (numero) values (?) ";
+				ps = conn.prepareStatement(query);
 				ps.setInt(1, (int) numero);
 				ps.execute();
 				//recupero el numero de codigo 

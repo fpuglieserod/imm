@@ -1,6 +1,8 @@
 package imm.modelo;
 
 import java.sql.Date;
+import java.sql.Timestamp;
+
 import imm.persistencia.*;
 public class ImmImpl implements Imm {
 
@@ -17,12 +19,12 @@ private Ticket ticket = new Ticket();
 		}
 
 	@Override
-	public Ticket ventaTicket(Agencia agencia, String matricula, Date hora_inicio, int minutos) throws Exception{
+	public Ticket ventaTicket(Agencia agencia, String matricula, Timestamp hora_inicio, int minutos) throws Exception{
 		// TODO Auto-generated method stub
 		try {
 		ticket.setAgencia(agencia);
 		ticket.setMatricula(matricula);
-		ticket.setHora_inicio(hora_inicio);
+		//ticket.setHora_inicio(hora_inicio);
 		ticket.setMinutos(minutos);
 		ticket.calcular_importe(minutos);
 		System.out.println("En venta ticket");
@@ -40,7 +42,10 @@ private Ticket ticket = new Ticket();
 	public int anularVenta(long numero, Agencia agencia) throws Exception{
 		// TODO Auto-generated method stub
 		try {
-		Codigo codigo = new Codigo(); 
+		//Codigo codigo = new Codigo(); 
+		System.out.println("numero de ticket a anular: (metodo anularVenta (ImmImpl)) " + numero);
+		System.out.println("agencia: " + agencia.getNombre());
+
 		int cod = this.accesoDB.anular(numero, agencia);
 		return cod;	
 		}catch (Exception ex) {

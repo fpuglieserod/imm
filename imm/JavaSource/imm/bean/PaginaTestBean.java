@@ -82,7 +82,10 @@ public class PaginaTestBean {
 		try{
 			Agencia agencia2 = new Agencia();
 			agencia2.setNombre(this.nombre_agencia);
-			System.out.println("en el metodo comprar........");
+			System.out.println("en el metodo anular en Pagina test bean........");
+			System.out.println("numero de ticket a anular: " + this.numero_ticket);
+			System.out.println("agencia que anula: " + agencia2.getNombre());
+
 			int c = gestor.anularVenta(this.numero_ticket, agencia2); 
 			System.out.println("Codigo anulación: " + c);
 			return null;
