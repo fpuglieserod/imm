@@ -42,7 +42,7 @@ public class PaginaTestBean {
 		agencia.setNombre(this.nombre_agencia);
 		System.out.println("en el metodo comprar........");
 		Ticket t = new Ticket();
-		t = gestor.ventaTicket(agencia, this.matricula, this.fecha_venta, this.minutos);
+		t = gestor.ventaTicket(agencia, this.matricula, this.minutos);
 		return null;
 		}catch (Exception ex){}
 		return null;

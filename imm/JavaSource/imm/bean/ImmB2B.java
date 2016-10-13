@@ -83,7 +83,8 @@ public void setTicketVO(TicketVO ticketvo) {
 
 
 @WebMethod
-	public Ticket venta(Agencia agencia,String matricula, Timestamp hora_inicio, int minutos){
+	// saco el timestamp hora_inicio 
+	public Ticket venta(Agencia agencia,String matricula, int minutos){
 	//TicketVO ticket;
 	try{
 	this.agencia = agencia;
@@ -99,7 +100,8 @@ public void setTicketVO(TicketVO ticketvo) {
 		this.minutos = minutos;
 		//ticketvo = gestor.ventaTicket(agencia, matricula, hora_inicio, minutos);
 		//fecha_prueba= Date.valueOf(fecha_now_prueba);
-		this.ticket = gestor.ventaTicket(this.agencia, this.matricula, hora_inicio, this.minutos);
+		// , hora_inicio
+		this.ticket = gestor.ventaTicket(this.agencia, this.matricula, this.minutos);
 		
 	
 	

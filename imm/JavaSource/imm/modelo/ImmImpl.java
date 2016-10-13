@@ -19,7 +19,8 @@ private Ticket ticket = new Ticket();
 		}
 
 	@Override
-	public Ticket ventaTicket(Agencia agencia, String matricula, Timestamp hora_inicio, int minutos) throws Exception{
+	// saco el timestamp : , Timestamp hora_inicio
+	public Ticket ventaTicket(Agencia agencia, String matricula, int minutos) throws Exception{
 		// TODO Auto-generated method stub
 		try {
 		ticket.setAgencia(agencia);
@@ -29,7 +30,7 @@ private Ticket ticket = new Ticket();
 		ticket.calcular_importe(minutos);
 		System.out.println("En venta ticket");
 		System.out.println("Agencia: "+ ticket.getAgencia().getNombre());
-		ticket.setNumero(this.accesoDB.guardarTicket(agencia, matricula, hora_inicio, minutos, ticket.getImporte()));
+		ticket.setNumero(this.accesoDB.guardarTicket(agencia, matricula, minutos, ticket.getImporte()));
 	    
 		return ticket;
 		}catch(Exception ex){

@@ -43,7 +43,8 @@ public class AccesoDB {
 	}
 	
 	// este metodo devuelve el numero de ticket y persiste los datos en la DB
-	public long guardarTicket (Agencia agencia, String matricula, Timestamp fecha_inicio, int minutos, float importe) throws Exception{
+	//Timestamp fecha_inicio,
+	public long guardarTicket (Agencia agencia, String matricula,  int minutos, float importe) throws Exception{
 		
 		try{
 		// guardo los datos 	
@@ -54,7 +55,7 @@ public class AccesoDB {
 			// cambiar el estado a vendido
 			//PreparedStatement ps = conn.prepareStatement("Select * from agenciass WHERE nombre = '" + agencia.getNombre() +"'");
 				
-			String query = "INSERT INTO ventas (id_a, estado,matricula, hora_inicio, minutos, fecha_venta, monto)" + " VALUES(?,?,?,?,?,?,?)";
+			String query = "INSERT INTO ventas (id_a, estado,matricula,minutos, fecha_venta, monto)" + " VALUES(?,?,?,?,?,?)";
 		    String query2= "Select * from agencias WHERE nombre = '" + agencia.getNombre() +"'";
 			PreparedStatement ps=conn.prepareStatement(query);
 			PreparedStatement ps2 = conn.prepareStatement(query2);
@@ -77,16 +78,16 @@ public class AccesoDB {
 		    
 		    //VER COMO PASAR UN TIME STAMP a la DB, antes le pasaba la hora-inicio y funcionaba bien 
 		    
-		   // ps.setTimestamp(4, new java.sql.Timestamp (fecha_inicio.getTime()));
-		    ps.setTimestamp(4, fecha_inicio);
+		    //ps.setTimestamp(4, new java.sql.Timestamp (fecha_inicio.getTime()));
+		    //ps.setTimestamp(4, fecha_inicio);
 		    //ps.setDate(4, fecha_inicio);
 		    //agrego minutos
-		    ps.setInt(5, minutos);
+		    ps.setInt(4, minutos);
 		    //agrego fecha de venta
 		    fecha_venta= Date.valueOf(fecha_now);
-		    ps.setDate(6, fecha_venta);
+		    ps.setDate(5, fecha_venta);
 		    // guardo el importe
-		    ps.setFloat(7, importe);
+		    ps.setFloat(6, importe);
 		    ps.execute();
 		    //busco el numero de ticket 
 		    ps = conn.prepareStatement("select LAST_INSERT_ID()");
