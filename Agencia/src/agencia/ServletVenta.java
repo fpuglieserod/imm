@@ -1,3 +1,4 @@
+package agencia;
 
 
 import java.io.IOException;
@@ -10,6 +11,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import imm.bean.Agencia;
 
 /**
  * Servlet implementation class ServletVenta
@@ -37,22 +40,24 @@ public class ServletVenta extends HttpServlet {
 			
 			String matricula = request.getParameter("matricula");
 			
-			String horaInicio = request.getParameter("horaInicio");
-			SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
-			Date fechainicio = formatoDelTexto.parse(horaInicio);
+			//String horaInicio = request.getParameter("horaInicio");
+			//SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+			//Date fechainicio = formatoDelTexto.parse(horaInicio);
 			
 			Integer minutos = new Integer(request.getParameter("minutos"));
 			
-			String mensaje = adm.ventaTicket(matricula, fechainicio, minutos);
+			Agencia agencia = new Agencia();
+			agencia.setNombre(request.getParameter("nombre_agencia"));
+			String mensaje = adm.ventaTicket(agencia,matricula, minutos);
 			
 			response.getWriter().write(mensaje);
 			
 			
 		} catch(NumberFormatException e){
 			response.getWriter().write("los parametros no son validos");
-		} catch (ParseException e) {
-			response.getWriter().write("formato de fecha invalido");
-		}
+		} //catch (ParseException e) {
+			//response.getWriter().write("formato de fecha invalido");
+		//}
 	}
 
 	/**

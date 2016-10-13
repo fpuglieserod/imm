@@ -3,6 +3,7 @@ import imm.bean.*;
 //import imm.bean.Exception;
 
 import java.util.Date;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 
 public class Test {
@@ -21,6 +22,10 @@ public class Test {
 		//LocalDate fecha_now = LocalDate.now();
 		//fecha_venta = Date.valueOf(fecha_now);
 		long fecha_long =fecha_venta.getTime();
+		
+		String text = "2016-10-07 15:00:00";
+		Timestamp ts = new Timestamp(fecha_long);
+		ts = Timestamp.valueOf(text);
 		
 		Ticket result = test.venta(agencia, matricula, fecha_long, minutos);
 		System.out.println("Resultado = " + result.toString());

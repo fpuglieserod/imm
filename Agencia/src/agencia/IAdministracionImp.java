@@ -1,8 +1,9 @@
+package agencia;
 import imm.bean.Agencia;
 import imm.bean.ImmB2B;
 import imm.bean.ImmB2BService;
-import imm.bean.ImmB2BServiceLocator;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class IAdministracionImp implements IAdministracion {
@@ -18,21 +19,29 @@ public class IAdministracionImp implements IAdministracion {
 		 return miIAdminImpl;
 	}
 	
-	public String ventaTicket(String matricula, Date hora_inicio, int minutos) {
+	public String ventaTicket(Agencia agencia, String matricula, int minutos) {
 		
 		String mensaje;
 		Ticket tk = new Ticket();
 		tk.setMatricula(matricula);
-		tk.setHoraInicio(hora_inicio);
+		//tk.setHoraInicio(hora_inicio);
 		tk.setCantidadMinutos(minutos);
-		
+		imm.bean.Agencia agencia1= new imm.bean.Agencia();
+		agencia1 = agencia;
 		try{
 			//invocar por ws a la venta de la imm
-			ImmB2BService srvimm = new ImmB2BServiceLocator();
+			ImmB2BService srvimm = new ImmB2BService();
 			ImmB2B imm = srvimm.getImmB2BPort();
-			Agencia agencia = imm.getAgencia();
-			long hi = hora_inicio.getTime(); //en version definitiva pasar datetime
-			if (imm.venta(agencia, matricula, hi, minutos) != null) {
+			
+			
+					// imm.getAgencia();
+			//long hi = hora_inicio.getTime(); //en version definitiva pasar datetime
+			//String text = "2016-10-07 15:00:00";
+			//imm.bean.Timestamp ts = new imm.bean.Timestamp();
+			//ts.setNanos((int)hi);
+			//ts = Timestamp.valueOf(text);
+			
+			if (imm.venta(agencia1, matricula, minutos) != null) {
 				//setear valores obtenidos en el ticket				
 				AccesoDB accesoDB = new AccesoDB();
 				accesoDB.guardarTicket(tk);
@@ -52,7 +61,7 @@ public class IAdministracionImp implements IAdministracion {
 		try{
 			//invocar anularVenta de la imm
 			
-			ImmB2BService svrimm = new ImmB2BServiceLocator();
+			ImmB2BService svrimm = new ImmB2BService();
 			ImmB2B imm = svrimm.getImmB2BPort();
 			Agencia agencia = imm.getAgencia();
 			if (imm.anular(numero, agencia)) {

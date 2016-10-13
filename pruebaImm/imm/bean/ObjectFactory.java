@@ -265,6 +265,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Timestamp }
+     * 
+     */
+    public Timestamp createTimestamp() {
+        return new Timestamp();
+    }
+
+    /**
      * Create an instance of {@link Codigo }
      * 
      */

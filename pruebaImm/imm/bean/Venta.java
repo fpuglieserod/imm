@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element name="arg0" type="{http://bean.imm/}agencia" minOccurs="0"/>
  *         &lt;element name="arg1" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="arg2" type="{http://www.w3.org/2001/XMLSchema}long"/>
+ *         &lt;element name="arg2" type="{http://bean.imm/}timestamp" minOccurs="0"/>
  *         &lt;element name="arg3" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -39,7 +39,7 @@ public class Venta {
 
     protected Agencia arg0;
     protected String arg1;
-    protected long arg2;
+    protected Timestamp arg2;
     protected int arg3;
 
     /**
@@ -93,16 +93,24 @@ public class Venta {
     /**
      * Obtiene el valor de la propiedad arg2.
      * 
+     * @return
+     *     possible object is
+     *     {@link Timestamp }
+     *     
      */
-    public long getArg2() {
+    public Timestamp getArg2() {
         return arg2;
     }
 
     /**
      * Define el valor de la propiedad arg2.
      * 
+     * @param value
+     *     allowed object is
+     *     {@link Timestamp }
+     *     
      */
-    public void setArg2(long value) {
+    public void setArg2(Timestamp value) {
         this.arg2 = value;
     }
 

@@ -152,7 +152,6 @@ public interface ImmB2B {
 
     /**
      * 
-     * @param arg3
      * @param arg2
      * @param arg1
      * @param arg0
@@ -169,8 +168,6 @@ public interface ImmB2B {
         @WebParam(name = "arg1", targetNamespace = "")
         String arg1,
         @WebParam(name = "arg2", targetNamespace = "")
-        long arg2,
-        @WebParam(name = "arg3", targetNamespace = "")
-        int arg3);
+        int arg2);
 
 }

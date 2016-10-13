@@ -1,3 +1,4 @@
+package agencia;
 import java.sql.*;
 
 import javax.naming.InitialContext;
@@ -9,7 +10,7 @@ public class AccesoDB {
 		
 		try {
 		InitialContext initContext = new InitialContext();
-		DataSource ds = (DataSource) initContext.lookup("java:jboss/datasources/MySqlDS");
+		DataSource ds = (DataSource) initContext.lookup("java:jboss/datasources/MySqlDS3");
 		Connection conn = ds.getConnection();
 		
 		String insert = "INSERT INTO ticket (id, numero, estado, matricula, fechaHoraVenta, horaInicio, cantidadMinutos, importe, terminal)" 
@@ -45,7 +46,7 @@ public class AccesoDB {
 		
 		String mensaje = "";
 		InitialContext initContext = new InitialContext();
-		DataSource ds = (DataSource) initContext.lookup("java:jboss/datasources/MySqlDS");
+		DataSource ds = (DataSource) initContext.lookup("java:jboss/datasources/MySqlDS3");
 		Connection conn = ds.getConnection();
 		
 		String consultaTicket = "select id from ticket where numero = " + String.valueOf(numero);

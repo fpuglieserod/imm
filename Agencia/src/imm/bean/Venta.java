@@ -18,8 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element name="arg0" type="{http://bean.imm/}agencia" minOccurs="0"/>
  *         &lt;element name="arg1" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="arg2" type="{http://www.w3.org/2001/XMLSchema}long"/>
- *         &lt;element name="arg3" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="arg2" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -32,15 +31,13 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "venta", propOrder = {
     "arg0",
     "arg1",
-    "arg2",
-    "arg3"
+    "arg2"
 })
 public class Venta {
 
     protected Agencia arg0;
     protected String arg1;
-    protected long arg2;
-    protected int arg3;
+    protected int arg2;
 
     /**
      * Obtiene el valor de la propiedad arg0.
@@ -94,7 +91,7 @@ public class Venta {
      * Obtiene el valor de la propiedad arg2.
      * 
      */
-    public long getArg2() {
+    public int getArg2() {
         return arg2;
     }
 
@@ -102,24 +99,8 @@ public class Venta {
      * Define el valor de la propiedad arg2.
      * 
      */
-    public void setArg2(long value) {
+    public void setArg2(int value) {
         this.arg2 = value;
-    }
-
-    /**
-     * Obtiene el valor de la propiedad arg3.
-     * 
-     */
-    public int getArg3() {
-        return arg3;
-    }
-
-    /**
-     * Define el valor de la propiedad arg3.
-     * 
-     */
-    public void setArg3(int value) {
-        this.arg3 = value;
     }
 
 }
