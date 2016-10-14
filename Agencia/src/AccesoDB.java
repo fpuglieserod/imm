@@ -97,16 +97,17 @@ public class AccesoDB {
 		}
 	}
 	
-	public void altaUsuario(String usuario, String contrasena, int terminal) throws Exception {
+	public void altaUsuario(String usuario, String contrasena) throws Exception {
 		
 		InitialContext initContext = new InitialContext();
 		DataSource ds = (DataSource) initContext.lookup("java:jboss/datasources/MySqlDS");
 		Connection conn = ds.getConnection();
 		
-		String insert = "insert into usuario (usuario, password, terminal) values ('" + usuario
-						+ "','" + contrasena + "'," + String.valueOf(terminal) + ";";
+		String insert = "insert into usuario (usuario, password, terminal) values (?,?);";
 		
 		PreparedStatement ps = conn.prepareStatement(insert);
+		ps.setString(1, usuario);
+		ps.setString(2, contrasena);
 		ps.executeQuery();
 		
 		ps.close();

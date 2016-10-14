@@ -71,19 +71,5 @@ public class IAdministracionImp implements IAdministracion {
 
 		return mensaje;
 	}
-	
-	public String altaUsuario(String usuario, String contrasena, int terminal) {
-		String mensaje = "";
-		
-		try {
-			AccesoDB accesoDB = new AccesoDB();
-			accesoDB.altaUsuario(usuario, contrasena, terminal); 
-			mensaje = "Se dio de alta el usuario correctamente";
-		} catch (Exception ex) {
-			mensaje = "No se pudo dar de alta el usuario por error de acceso";
-		}
-		
-		return mensaje;
-	}
 
 }
