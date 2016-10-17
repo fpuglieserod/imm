@@ -1,6 +1,7 @@
 package imm.persistencia;
 import imm.modelo.Agencia;
 //import laboratoriojee.modelo.EditorialExisteException;
+import imm.modelo.Usuario;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -17,7 +18,7 @@ public class AccesoDB {
 	private Date fecha_venta;
 	private LocalDate fecha_now = LocalDate.now();
 	//private Date fecha_creacion = Date.valueOf(fecha_now);
-	
+	private Usuario usuario;
 	public Boolean consultaAgencia (Agencia agencia) throws Exception{
 	
 	try {
@@ -44,6 +45,35 @@ public class AccesoDB {
 	
 	// este metodo devuelve el numero de ticket y persiste los datos en la DB
 	//Timestamp fecha_inicio,
+	public boolean validarUsuario(Usuario usuario) throws Exception{
+		
+		try {
+			
+			this.usuario = usuario;
+			String user = this.usuario.getUsuario();
+			String contra = this.usuario.getContraseña();
+			InitialContext initContext = new InitialContext();
+			DataSource ds = (DataSource) initContext.lookup("java:jboss/datasources/MySqlDS2");
+			Connection conn = ds.getConnection();
+			PreparedStatement ps = conn.prepareStatement("Select * from usuarios WHERE nombre = '"+user+"' and contraseña='"+contra+"'");
+			ResultSet rs = ps.executeQuery();
+			if(rs.absolute(1)) {//aparentemente la consulta devuelve 1 si es verdadera
+			     
+			     System.out.println("usuario correcto....");
+			     
+			     ps.execute();
+			     conn.close();
+			     return true;
+			 }else {
+				 System.out.println("usuario y/o contraseña incorrecta");
+				 return false;}
+			
+		
+		}catch (Exception ex){
+			ex.printStackTrace();
+		}return false;
+	}
+	
 	public long guardarTicket (Agencia agencia, String matricula,  int minutos, float importe) throws Exception{
 		
 		try{
