@@ -1,4 +1,4 @@
-
+import java.sql.Timestamp;
 import java.util.Date;
 
 
@@ -8,8 +8,8 @@ public interface IAdministracion {
 	
 	public String anularTicket(int numero);
 	
-//	public void reporteTotalDiario();
-//	
-//	public void reporteTotalXFranjaHoraria();
+	public void reporteTotalDiario(Date dia);
+	
+	public void reporteTotalXFranjaHoraria(Timestamp inicio, Timestamp fin);
 	
 }

@@ -1,4 +1,3 @@
-
 import java.sql.*;
 
 import javax.naming.InitialContext;
@@ -59,7 +58,7 @@ public class AccesoDB {
 			try {
 				String anula = "update ticket set estado = 'ANULADO' where id = " + rs.getString(1);
 				PreparedStatement ps2 = conn.prepareStatement(anula);
-				ps2.executeQuery();
+				ps2.execute();
 				mensaje = "Se anulo el ticket exitosamente";
 				ps2.close();
 			} catch (Exception ex){
@@ -109,10 +108,69 @@ public class AccesoDB {
 		PreparedStatement ps = conn.prepareStatement(insert);
 		ps.setString(1, usuario);
 		ps.setString(2, contrasena);
-		ps.executeQuery();
+		ps.execute();
 		
 		ps.close();
 		conn.close();
 		
+	}
+	
+	public void reporteTotal(Date dia) throws Exception {
+		
+		InitialContext initContext = new InitialContext();
+		DataSource ds = (DataSource) initContext.lookup("java:jboss/datasources/MySqlDS");
+		Connection conn = ds.getConnection();
+		
+		String select = "select * from ticket where date(fechaHoraVenta) = ? ;";
+		
+		PreparedStatement ps = conn.prepareStatement(select);
+		ps.setDate(1,dia);
+		ResultSet rs = ps.executeQuery();
+		
+		System.out.println("Id	Numero	Estado	Matricula	FechaHoraVenta	Cant Minutos	Importe");
+		System.out.println();
+		
+		while (rs.next()) {
+			System.out.print(rs.getString(1) + "	");
+			System.out.print(rs.getString(2) + "	");
+			System.out.print(rs.getString(3) + "	");
+			System.out.print(rs.getString(4) + "	");
+			System.out.print(rs.getString(5) + "	");
+			System.out.print(rs.getString(7) + "	");
+			System.out.println(rs.getString(8));
+		}
+		
+		rs.close();
+		ps.close();
+		conn.close();
+	}
+	
+	public void reporteXFranja(Timestamp inicio, Timestamp fin) throws Exception {
+		
+		InitialContext initContext = new InitialContext();
+		DataSource ds = (DataSource) initContext.lookup("java:jboss/datasources/MySqlDS");
+		Connection conn = ds.getConnection();
+		
+		String select = "select * from ticket where fechaHoraVenta between ? and ? ;";
+		PreparedStatement ps = conn.prepareStatement(select);
+		ps.setTimestamp(1,inicio);
+		ps.setTimestamp(2,fin);
+		ResultSet rs = ps.executeQuery();
+		
+		System.out.println("Id	Numero	Estado	Matricula	FechaHoraVenta	Cant Minutos	Importe");
+		System.out.println();
+		
+		while (rs.next()) {
+			System.out.print(rs.getString(1) + "	");
+			System.out.print(rs.getString(2) + "	");
+			System.out.print(rs.getString(3) + "	");
+			System.out.print(rs.getString(4) + "	");
+			System.out.print(rs.getString(5) + "	");
+			System.out.print(rs.getString(7) + "	");
+			System.out.println(rs.getString(8));
+		}
+		
+		rs.close();
+		conn.close();
 	}
 }
