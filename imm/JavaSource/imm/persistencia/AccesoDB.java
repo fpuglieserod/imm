@@ -65,7 +65,7 @@ public class AccesoDB {
 			     conn.close();
 			     return true;
 			 }else {
-				 System.out.println("usuario y/o contraseña incorrecta");
+				 System.out.println("usuario y/o contraseña incorrecta, verifique sus credenciales");
 				 return false;}
 			
 		
