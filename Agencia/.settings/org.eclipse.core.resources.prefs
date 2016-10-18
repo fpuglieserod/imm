@@ -1,0 +1,10 @@
+eclipse.preferences.version=1
+encoding//src/imm/bean/Agencia.java=UTF-8
+encoding//src/imm/bean/Codigo.java=UTF-8
+encoding//src/imm/bean/Date.java=UTF-8
+encoding//src/imm/bean/ImmB2B.java=UTF-8
+encoding//src/imm/bean/ImmB2BService.java=UTF-8
+encoding//src/imm/bean/ImmB2BServiceLocator.java=UTF-8
+encoding//src/imm/bean/ImmB2BServiceSoapBindingStub.java=UTF-8
+encoding//src/imm/bean/Ticket.java=UTF-8
+encoding//src/imm/bean/TicketVO.java=UTF-8
