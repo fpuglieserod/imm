@@ -9,7 +9,7 @@
 	<from-view-id>/loguin.jsp</from-view-id>
 	<navigation-case>
 		<from-outcome>success</from-outcome>
-		<to-view-id>/reportes.jsp</to-view-id>
+		<to-view-id>/menu.jsp</to-view-id>
 	</navigation-case>
 	<navigation-case>
 		<from-outcome>failure</from-outcome>
