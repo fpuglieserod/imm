@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class Servidor {
 
-	static final int puerto = 5000;
+	static final int puerto = 3306;
 	
 	public Servidor() {
 		try {
