@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Cliente {
 
 	static final String host = "localhost";
-	static final int puerto = 5000;
+	static final int puerto = 3306;
 	
 	public Cliente() {
 		try {
@@ -77,7 +77,7 @@ public class Cliente {
 							break;
 						}
 						
-						default : { System.err.println("\n Ingrese un comando válido\n"); break; }
+						default : { System.err.println("\n Ingrese un comando vï¿½lido\n"); break; }
 					}
 				} while (comando != "3");
 			}
