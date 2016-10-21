@@ -45,9 +45,9 @@ public class AccesoDB {
 	
 	// este metodo devuelve el numero de ticket y persiste los datos en la DB
 	//Timestamp fecha_inicio,
-	public void validarUsuario(Usuario usuario) throws Exception{
+	public boolean validarUsuario(Usuario usuario) throws Exception{
 		
-		//try {
+		try {
 			
 			this.usuario = usuario;
 			String user = this.usuario.getUsuario();
@@ -55,7 +55,7 @@ public class AccesoDB {
 			InitialContext initContext = new InitialContext();
 			DataSource ds = (DataSource) initContext.lookup("java:jboss/datasources/MySqlDS2");
 			Connection conn = ds.getConnection();
-			PreparedStatement ps = conn.prepareStatement("Select * from usuarios WHERE usuario = '"+user+"' and contraseña='"+contra+"'");
+			PreparedStatement ps = conn.prepareStatement("Select * from usuarios WHERE nombre = '"+user+"' and contraseña='"+contra+"'");
 			ResultSet rs = ps.executeQuery();
 			if(rs.absolute(1)) {//aparentemente la consulta devuelve 1 si es verdadera
 			     
@@ -63,15 +63,15 @@ public class AccesoDB {
 			     
 			     ps.execute();
 			     conn.close();
-			    // return true;
-			}  else throw new Exception();
-				 //System.out.println("usuario y/o contraseña incorrecta, verifique sus credenciales");
-				 //return false;}
+			     return true;
+			 }else {
+				 System.out.println("usuario y/o contraseña incorrecta, verifique sus credenciales");
+				 return false;}
 			
 		
-		//}catch (Exception ex){
-			//ex.printStackTrace();
-		//}return false;
+		}catch (Exception ex){
+			ex.printStackTrace();
+		}return false;
 	}
 	
 	public long guardarTicket (Agencia agencia, String matricula,  int minutos, float importe) throws Exception{

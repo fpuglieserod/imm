@@ -4,7 +4,6 @@ import imm.modelo.*;
 import javax.jws.WebService;
 
 import java.sql.Date;
-import java.sql.Timestamp;
 import java.time.LocalDate;
 
 import javax.jws.WebMethod;
@@ -83,8 +82,7 @@ public void setTicketVO(TicketVO ticketvo) {
 
 
 @WebMethod
-	// saco el timestamp hora_inicio 
-	public Ticket venta(Agencia agencia,String matricula, int minutos){
+	public Ticket venta(Agencia agencia,String matricula, long hora_inicio, int minutos){
 	//TicketVO ticket;
 	try{
 	this.agencia = agencia;
@@ -94,14 +92,13 @@ public void setTicketVO(TicketVO ticketvo) {
 		System.out.println("adentro del if de venta");
 		//procedo a vender
 		this.matricula = matricula;
-		//Date h = new Date (hora_inicio);
+		Date h = new Date (hora_inicio);
 		//this.hora_inicio = hora_inicio;
-		//this.hora_inicio = h;
+		this.hora_inicio = h;
 		this.minutos = minutos;
 		//ticketvo = gestor.ventaTicket(agencia, matricula, hora_inicio, minutos);
 		//fecha_prueba= Date.valueOf(fecha_now_prueba);
-		// , hora_inicio
-		this.ticket = gestor.ventaTicket(this.agencia, this.matricula, this.minutos);
+		this.ticket = gestor.ventaTicket(this.agencia, this.matricula, this.hora_inicio, this.minutos);
 		
 	
 	
