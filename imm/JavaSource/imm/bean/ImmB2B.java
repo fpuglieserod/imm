@@ -19,6 +19,7 @@ private int minutos;
 private static ImmImpl gestor = new ImmImpl();
 private TicketVO ticketvo;
 private Ticket ticket;
+
 // son para probar la hora de inicio
 Date fecha_prueba;
 LocalDate fecha_now_prueba = LocalDate.now();
@@ -82,7 +83,7 @@ public void setTicketVO(TicketVO ticketvo) {
 
 
 @WebMethod
-	public Ticket venta(Agencia agencia,String matricula, long hora_inicio, int minutos){
+	public Ticket venta(Agencia agencia,String matricula, int minutos){
 	//TicketVO ticket;
 	try{
 	this.agencia = agencia;
@@ -92,13 +93,13 @@ public void setTicketVO(TicketVO ticketvo) {
 		System.out.println("adentro del if de venta");
 		//procedo a vender
 		this.matricula = matricula;
-		Date h = new Date (hora_inicio);
+		//Date h = new Date (hora_inicio);
 		//this.hora_inicio = hora_inicio;
-		this.hora_inicio = h;
+		//this.hora_inicio = h;
 		this.minutos = minutos;
 		//ticketvo = gestor.ventaTicket(agencia, matricula, hora_inicio, minutos);
 		//fecha_prueba= Date.valueOf(fecha_now_prueba);
-		this.ticket = gestor.ventaTicket(this.agencia, this.matricula, this.hora_inicio, this.minutos);
+		this.ticket = gestor.ventaTicket(this.agencia, this.matricula, this.minutos);
 		
 	
 	
@@ -112,8 +113,18 @@ public void setTicketVO(TicketVO ticketvo) {
 	} 
 
 @WebMethod 
-	public Boolean anular(int numero, Agencia agencia){
-	return true;
+	public int anular(int numero, Agencia agencia) {
+	
+	try {
+	
+	int codigo_anulación = gestor.anularVenta(numero, agencia); 
+	
+	return codigo_anulación;
+	}catch (Exception ex){
+		ex.printStackTrace();
+	}
+	System.out.println("La anulacion no se pudo efectuar, comuniquese con la imm para mas información");
+	return -1;
 }
 
 
