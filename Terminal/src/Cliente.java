@@ -77,7 +77,7 @@ public class Cliente {
 							break;
 						}
 						
-						default : { System.err.println("\n Ingrese un comando válido\n"); break; }
+						default : { System.err.println("\n Ingrese un comando vï¿½lido\n"); break; }
 					}
 				} while (comando != "3");
 			}
