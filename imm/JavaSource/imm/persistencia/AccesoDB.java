@@ -55,7 +55,7 @@ public class AccesoDB {
 			InitialContext initContext = new InitialContext();
 			DataSource ds = (DataSource) initContext.lookup("java:jboss/datasources/MySqlDS2");
 			Connection conn = ds.getConnection();
-			PreparedStatement ps = conn.prepareStatement("Select * from usuarios WHERE nombre = '"+user+"' and contraseña='"+contra+"'");
+			PreparedStatement ps = conn.prepareStatement("Select * from usuarios WHERE usuario = '"+user+"' and contraseña='"+contra+"'");
 			ResultSet rs = ps.executeQuery();
 			if(rs.absolute(1)) {//aparentemente la consulta devuelve 1 si es verdadera
 			     

@@ -16,6 +16,16 @@
 		<to-view-id>/loguin.jsp</to-view-id>
 	</navigation-case>
 </navigation-rule>
-
+<navigation-rule>
+	<from-view-id>/menu.jsp</from-view-id>
+	<navigation-case>
+		<from-outcome>success</from-outcome>
+		<to-view-id>/reportes.jsp</to-view-id>
+	</navigation-case>
+	<navigation-case>
+		<from-outcome>failure</from-outcome>
+		<to-view-id>/menu.jsp</to-view-id>
+	</navigation-case>
+</navigation-rule>
 
 </faces-config>
