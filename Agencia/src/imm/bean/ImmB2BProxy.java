@@ -44,7 +44,7 @@ public class ImmB2BProxy implements imm.bean.ImmB2B {
     return immB2B;
   }
   
-  public java.lang.Boolean anular(int arg0, imm.bean.Agencia arg1) throws java.rmi.RemoteException{
+  public int anular(int arg0, imm.bean.Agencia arg1) throws java.rmi.RemoteException{
     if (immB2B == null)
       _initImmB2BProxy();
     return immB2B.anular(arg0, arg1);
@@ -110,10 +110,10 @@ public class ImmB2BProxy implements imm.bean.ImmB2B {
     immB2B.setMinutos(arg0);
   }
   
-  public imm.bean.Ticket venta(imm.bean.Agencia arg0, java.lang.String arg1, long arg2, int arg3) throws java.rmi.RemoteException{
+  public imm.bean.Ticket venta(imm.bean.Agencia arg0, java.lang.String arg1, int arg2) throws java.rmi.RemoteException{
     if (immB2B == null)
       _initImmB2BProxy();
-    return immB2B.venta(arg0, arg1, arg2, arg3);
+    return immB2B.venta(arg0, arg1, arg2);
   }
   
   

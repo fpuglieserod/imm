@@ -33,7 +33,7 @@ public class ServletMenu extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String metodo = request.getParameter("metodo");
 		
-		IAdministracionImp adm = new IAdministracionImp();
+		//IAdministracionImp adm = new IAdministracionImp();
 		
 		if("altaUsuario".equals(metodo)){
 	 		RequestDispatcher rd = request.getRequestDispatcher("/AltaUsuario.jsp");

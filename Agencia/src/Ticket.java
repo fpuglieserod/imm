@@ -1,13 +1,12 @@
 import java.util.Date;
 
-
 public class Ticket {
 	
 	private long numero;
 	public enum estado {VENDIDO,ANULADO};
 	private String codigo_anulacion;
 	private String matricula;
-	private Date fechaHoraVenta;
+	private java.sql.Date fechaHoraVenta;
 	private Date horaInicio;
 	private int cantidadMinutos;
 	private float importe;
@@ -37,7 +36,7 @@ public class Ticket {
 	public Date getFechaHoraVenta() {
 		return fechaHoraVenta;
 	}
-	public void setFechaHoraVenta(Date fechaHoraVenta) {
+	public void setFechaHoraVenta(java.sql.Date fechaHoraVenta) {
 		this.fechaHoraVenta = fechaHoraVenta;
 	}
 	

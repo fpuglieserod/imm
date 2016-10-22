@@ -36,7 +36,7 @@ public class AccesoDB {
 		
 	}
 	
-	public String guardarAnulacion(int numero) throws Exception {
+	public String guardarAnulacion(int numero, int codigo) throws Exception {
 		
 		String mensaje = "";
 		InitialContext initContext = new InitialContext();
@@ -50,8 +50,10 @@ public class AccesoDB {
 		if (!(rs.next())) mensaje = "no existe ticket con ese numero";
 		else {
 			try {
-				String anula = "update ticket set estado = 'ANULADO' where id = " + rs.getString(1);
+				String anula = "update ticket set estado = 'ANULADO', codigoanulacion = ? where id = ?; ";
 				PreparedStatement ps2 = conn.prepareStatement(anula);
+				ps2.setInt(1, codigo);
+				ps2.setInt(2, Integer.valueOf(rs.getString(1)));
 				ps2.execute();
 				mensaje = "Se anulo el ticket exitosamente";
 				ps2.close();

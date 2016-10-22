@@ -4,6 +4,7 @@ import imm.bean.ImmB2BService;
 import imm.bean.ImmB2BServiceLocator;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class IAdministracionImp implements IAdministracion {
@@ -32,12 +33,13 @@ public class IAdministracionImp implements IAdministracion {
 			ImmB2BService srvimm = new ImmB2BServiceLocator();
 			ImmB2B imm = srvimm.getImmB2BPort();
 			Agencia agencia = imm.getAgencia();
-			long hi = hora_inicio.getTime(); //en version definitiva pasar datetime
-			imm.bean.Ticket t = imm.venta(agencia, matricula, hi, minutos);
+			//long hi = hora_inicio.getTime(); //en version definitiva pasar datetime
+			imm.bean.Ticket t = imm.venta(agencia, matricula, minutos);
 			if (t != null) {
 				
 				tk.setNumero(t.getNumero());
-				//tk.setFechaHoraVenta(t.getFecha_venta());
+				LocalDate fecha_now = LocalDate.now();
+				tk.setFechaHoraVenta(java.sql.Date.valueOf(fecha_now));
 				tk.setImporte(t.getImporte());
 								
 				AccesoDB accesoDB = new AccesoDB();
@@ -60,11 +62,13 @@ public class IAdministracionImp implements IAdministracion {
 			
 			ImmB2BService svrimm = new ImmB2BServiceLocator();
 			ImmB2B imm = svrimm.getImmB2BPort();
-			Agencia agencia = imm.getAgencia();
-			if (imm.anular(numero, agencia)) {
+			Agencia agencia = new Agencia();
+			agencia.setNombre("tickantel");
+			int codigo = imm.anular(numero, agencia);
+			if (codigo != -1) {
 			
 				AccesoDB accesoDB = new AccesoDB();
-				mensaje = accesoDB.guardarAnulacion(numero);
+				mensaje = accesoDB.guardarAnulacion(numero, codigo);
 				} else mensaje = "La venta no pudo anularse en la imm";
 			} catch (Exception ex){
 				mensaje = "No se pudo anular el ticket " + ex.getMessage();
