@@ -30,32 +30,23 @@ public class ServletVenta extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String metodo = request.getParameter("metodo");
-		
+				
 		try {
 			
 			IAdministracionImp adm = new IAdministracionImp();
 			
-			if("Venta".equals(metodo)) {
-				String matricula = request.getParameter("matricula");
-				
-				String horaInicio = request.getParameter("horaInicio");
-				SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
-				Date fechainicio = formatoDelTexto.parse(horaInicio);
-				
-				Integer minutos = new Integer(request.getParameter("minutos"));
-				
-				String mensaje = adm.ventaTicket(matricula, fechainicio, minutos);
-				
-				response.getWriter().write(mensaje);
-			}
+			String matricula = request.getParameter("matricula");
 			
-			if("Anular".equals(metodo)) {
-				Integer numero = new Integer(request.getParameter("numero"));
-				String mensajeAnular = adm.anularTicket(numero);
-				response.getWriter().write(mensajeAnular);
-			}
+			String horaInicio = request.getParameter("horaInicio");
+			SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+			Date fechainicio = formatoDelTexto.parse(horaInicio);
+			
+			Integer minutos = new Integer(request.getParameter("minutos"));
+			
+			String mensaje = adm.ventaTicket(matricula, fechainicio, minutos);
+			
+			response.getWriter().write(mensaje);
+		
 			
 		} catch(NumberFormatException e){
 			response.getWriter().write("los parametros no son validos");
