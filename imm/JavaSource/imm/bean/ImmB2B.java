@@ -117,9 +117,9 @@ public void setTicketVO(TicketVO ticketvo) {
 	
 	try {
 	
-	int codigo_anulación = gestor.anularVenta(numero, agencia); 
+	int codigo_anulacion = gestor.anularVenta(numero, agencia); 
 	
-	return codigo_anulación;
+	return codigo_anulacion;
 	}catch (Exception ex){
 		ex.printStackTrace();
 	}
