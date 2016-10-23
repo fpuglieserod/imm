@@ -9,11 +9,11 @@ public class AccesoDB {
 		
 		try {
 		InitialContext initContext = new InitialContext();
-		DataSource ds = (DataSource) initContext.lookup("java:jboss/datasources/MySqlDS");
+		DataSource ds = (DataSource) initContext.lookup("java:jboss/datasources/MySqlDS3");
 		Connection conn = ds.getConnection();
 		
-		String insert = "INSERT INTO ticket (numero, estado, matricula, fechaHoraVenta, horaInicio, cantidadMinutos, importe, terminal)" 
-		+ " VALUES(?,?,?,?,?,?,?,?,?)";
+		String insert = "INSERT INTO ticket (numero, estado, matricula, fechaHoraVenta, cantidadMinutos, importe, terminal)" 
+		+ " VALUES(?,?,?,?,?,?,?)";
 		
 		PreparedStatement ps = conn.prepareStatement(insert);
 				
@@ -21,10 +21,10 @@ public class AccesoDB {
 		ps.setString(2, "VENDIDO");
 		ps.setString(3, t.getMatricula());
 		ps.setDate(4, (Date) t.getFechaHoraVenta());
-		ps.setDate(5, (Date) t.getHoraInicio());
-		ps.setInt(6, t.getCantidadMinutos());
-		ps.setFloat(7, t.getImporte());
-		ps.setInt(8, t.getTerminal());
+		//ps.setDate(5, (Date) t.getHoraInicio());
+		ps.setInt(5, t.getCantidadMinutos());
+		ps.setFloat(6, t.getImporte());
+		ps.setInt(7, t.getTerminal());
 		
 		ps.execute();
 		ps.close();
@@ -40,7 +40,7 @@ public class AccesoDB {
 		
 		String mensaje = "";
 		InitialContext initContext = new InitialContext();
-		DataSource ds = (DataSource) initContext.lookup("java:jboss/datasources/MySqlDS");
+		DataSource ds = (DataSource) initContext.lookup("java:jboss/datasources/MySqlDS3");
 		Connection conn = ds.getConnection();
 		
 		String consultaTicket = "select id from ticket where numero = " + String.valueOf(numero);
@@ -71,15 +71,15 @@ public class AccesoDB {
 	public Boolean esUsuario(String usuario, String contrasena) throws Exception {
 		
 		InitialContext initContext = new InitialContext();
-		DataSource ds = (DataSource) initContext.lookup("java:jboss/datasources/MySqlDS");
+		DataSource ds = (DataSource) initContext.lookup("java:jboss/datasources/MySqlDS3");
 		Connection conn = ds.getConnection();
 		
-		String consulta = "select * from usuario where usuario = " + usuario 
-							+ "password = " + contrasena + ";";
+		String consulta = "select * from usuario where usuario = '" + usuario 
+							+ "'and password = '" + contrasena + "'";
 		PreparedStatement ps = conn.prepareStatement(consulta);
 		ResultSet rs = ps.executeQuery();
 		
-		if (!(rs.next())) {
+		if (!(rs.absolute(1))) {
 			rs.close();
 			ps.close();
 			conn.close();
@@ -96,7 +96,7 @@ public class AccesoDB {
 	public void altaUsuario(String usuario, String contrasena) throws Exception {
 		
 		InitialContext initContext = new InitialContext();
-		DataSource ds = (DataSource) initContext.lookup("java:jboss/datasources/MySqlDS");
+		DataSource ds = (DataSource) initContext.lookup("java:jboss/datasources/MySqlDS3");
 		Connection conn = ds.getConnection();
 		
 		String insert = "insert into usuario (usuario, password, terminal) values (?,?);";
@@ -114,7 +114,7 @@ public class AccesoDB {
 	public void reporteTotal(Date dia) throws Exception {
 		
 		InitialContext initContext = new InitialContext();
-		DataSource ds = (DataSource) initContext.lookup("java:jboss/datasources/MySqlDS");
+		DataSource ds = (DataSource) initContext.lookup("java:jboss/datasources/MySqlDS3");
 		Connection conn = ds.getConnection();
 		
 		String select = "select * from ticket where date(fechaHoraVenta) = ? ;";
@@ -144,7 +144,7 @@ public class AccesoDB {
 	public void reporteXFranja(Timestamp inicio, Timestamp fin) throws Exception {
 		
 		InitialContext initContext = new InitialContext();
-		DataSource ds = (DataSource) initContext.lookup("java:jboss/datasources/MySqlDS");
+		DataSource ds = (DataSource) initContext.lookup("java:jboss/datasources/MySqlDS3");
 		Connection conn = ds.getConnection();
 		
 		String select = "select * from ticket where fechaHoraVenta between ? and ? ;";

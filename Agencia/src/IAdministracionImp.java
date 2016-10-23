@@ -30,7 +30,7 @@ public class IAdministracionImp implements IAdministracion {
 		
 		try{
 			//invocar por ws a la venta de la imm
-			ImmB2BService srvimm = new ImmB2BServiceLocator();
+			ImmB2BService srvimm = new ImmB2BService();
 			ImmB2B imm = srvimm.getImmB2BPort();
 			Agencia agencia = new Agencia();
 			agencia.setNombre("tickantel");
@@ -61,11 +61,11 @@ public class IAdministracionImp implements IAdministracion {
 		try{
 			//invocar anularVenta de la imm
 			
-			ImmB2BService svrimm = new ImmB2BServiceLocator();
+			ImmB2BService svrimm = new ImmB2BService();
 			ImmB2B imm = svrimm.getImmB2BPort();
-			Agencia agencia = new Agencia();
-			agencia.setNombre("tickantel");
-			int codigo = imm.anular(numero, agencia);
+			Agencia agencia2 = new Agencia();
+			agencia2.setNombre("tickantel");
+			int codigo = imm.anular(numero, agencia2);
 			if (codigo != -1) {
 			
 				AccesoDB accesoDB = new AccesoDB();

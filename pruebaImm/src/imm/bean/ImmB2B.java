@@ -28,13 +28,13 @@ public interface ImmB2B {
      * @param arg1
      * @param arg0
      * @return
-     *     returns java.lang.Boolean
+     *     returns int
      */
     @WebMethod
     @WebResult(targetNamespace = "")
     @RequestWrapper(localName = "anular", targetNamespace = "http://bean.imm/", className = "imm.bean.Anular")
     @ResponseWrapper(localName = "anularResponse", targetNamespace = "http://bean.imm/", className = "imm.bean.AnularResponse")
-    public Boolean anular(
+    public int anular(
         @WebParam(name = "arg0", targetNamespace = "")
         int arg0,
         @WebParam(name = "arg1", targetNamespace = "")
@@ -152,7 +152,6 @@ public interface ImmB2B {
 
     /**
      * 
-     * @param arg3
      * @param arg2
      * @param arg1
      * @param arg0
@@ -169,8 +168,6 @@ public interface ImmB2B {
         @WebParam(name = "arg1", targetNamespace = "")
         String arg1,
         @WebParam(name = "arg2", targetNamespace = "")
-        long arg2,
-        @WebParam(name = "arg3", targetNamespace = "")
-        int arg3);
+        int arg2);
 
 }
