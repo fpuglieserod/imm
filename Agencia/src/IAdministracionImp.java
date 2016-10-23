@@ -32,7 +32,8 @@ public class IAdministracionImp implements IAdministracion {
 			//invocar por ws a la venta de la imm
 			ImmB2BService srvimm = new ImmB2BServiceLocator();
 			ImmB2B imm = srvimm.getImmB2BPort();
-			Agencia agencia = imm.getAgencia();
+			Agencia agencia = new Agencia();
+			agencia.setNombre("tickantel");
 			//long hi = hora_inicio.getTime(); //en version definitiva pasar datetime
 			imm.bean.Ticket t = imm.venta(agencia, matricula, minutos);
 			if (t != null) {
