@@ -1,8 +1,6 @@
 import imm.bean.Agencia;
 import imm.bean.ImmB2B;
 import imm.bean.ImmB2BService;
-import imm.bean.ImmB2BServiceLocator;
-
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.Date;
@@ -34,6 +32,7 @@ public class IAdministracionImp implements IAdministracion {
 			ImmB2B imm = srvimm.getImmB2BPort();
 			Agencia agencia = new Agencia();
 			agencia.setNombre("tickantel");
+			
 			//long hi = hora_inicio.getTime(); //en version definitiva pasar datetime
 			imm.bean.Ticket t = imm.venta(agencia, matricula, minutos);
 			if (t != null) {

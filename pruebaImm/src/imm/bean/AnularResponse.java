@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="return" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
+ *         &lt;element name="return" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -33,29 +33,21 @@ import javax.xml.bind.annotation.XmlType;
 public class AnularResponse {
 
     @XmlElement(name = "return")
-    protected Boolean _return;
+    protected int _return;
 
     /**
      * Obtiene el valor de la propiedad return.
      * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
      */
-    public Boolean isReturn() {
+    public int getReturn() {
         return _return;
     }
 
     /**
      * Define el valor de la propiedad return.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
      */
-    public void setReturn(Boolean value) {
+    public void setReturn(int value) {
         this._return = value;
     }
 
