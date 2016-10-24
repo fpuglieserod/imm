@@ -2,7 +2,7 @@
 public class Usuario {
 
 	private String usuario;
-	private String contraseña; //ver como cifrar clave al guardar en base
+	private String contraseÃ±a; //ver como cifrar clave al guardar en base
 	private int terminal;
 	
 	public String getUsuario() {
@@ -19,11 +19,11 @@ public class Usuario {
 		this.terminal = terminal;
 	}
 	
-	public String getContraseña() {
-		return contraseña;
+	public String getContraseÃ±a() {
+		return contraseÃ±a;
 	}
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setContraseÃ±a(String contraseÃ±a) {
+		this.contraseÃ±a = contraseÃ±a;
 	}
 		
 

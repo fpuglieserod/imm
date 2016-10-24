@@ -3,6 +3,8 @@ import java.net.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import imm.bean.Agencia;
+
 
 public class Servidor {
 
@@ -28,7 +30,7 @@ public class Servidor {
 			do {
 				salida.writeUTF("\n Ingrese el usuario: \n");
 				usuario = entrada.readUTF();
-				salida.writeUTF("\n Ingrese contraseña: \n");
+				salida.writeUTF("\n Ingrese contraseÃ±a: \n");
 				password = entrada.readUTF();
 				
 				mensaje = login.login(usuario, password);
@@ -42,7 +44,7 @@ public class Servidor {
 				
 				do {
 					salida.writeUTF("\nElija una opcion: \n\r" + "1 - Venta de Ticket\n\r" 
-							+ "2 - Anulación de Ticket\n\r" + "3 - Salir\n");
+							+ "2 - Anulacion de Ticket\n\r" + "3 - Salir\n");
 					comando = entrada.readUTF();
 					
 					switch (comando) {
@@ -50,6 +52,10 @@ public class Servidor {
 						case "1": {
 							salida.writeUTF("\nIngrese matricula: \n");
 							String matricula = entrada.readUTF();
+							salida.writeUTF("\nIngrese Agencia: \n");
+							String nombre_agencia= entrada.readUTF();
+							Agencia agencia = new Agencia();
+							agencia.setNombre(nombre_agencia);
 							salida.writeUTF("\nIngrese fecha hora inicio: \n");
 							String fecha = entrada.readUTF();
 							SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
@@ -58,7 +64,7 @@ public class Servidor {
 							String min = entrada.readUTF();
 							int minutos = Integer.parseInt(min);
 							
-							mensaje = imp.ventaTicket(matricula, fechainicio, minutos);
+							mensaje = imp.ventaTicket(agencia,matricula, minutos);
 							salida.writeUTF(mensaje);
 							break;
 						}
