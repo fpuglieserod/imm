@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import imm.bean.Agencia;
+
 /**
  * Servlet implementation class ServletVenta
  */
@@ -43,7 +45,9 @@ public class ServletVenta extends HttpServlet {
 			
 			Integer minutos = new Integer(request.getParameter("minutos"));
 			
-			String mensaje = adm.ventaTicket(matricula, fechainicio, minutos);
+			//Agencia ag= new Agencia();
+			//ag.setNombre("abitab");
+			String mensaje = adm.ventaTicket(matricula,fechainicio,minutos);
 			
 			response.getWriter().write(mensaje);
 		
